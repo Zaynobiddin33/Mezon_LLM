@@ -1,0 +1,75 @@
+{% extends "layouts/app.html" %}
+{% load mezon %}
+{% block title %}Bosh sahifa{% endblock %}
+{% block crumbs %}<span aria-current="page">Bosh sahifa</span>{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1 class="page-title two-tone">{{ greeting }}, {{ user.first_name|default:user.username }}.
+    <span class="soft">{% if open_now %}{{ open_now }} ta so‘rov qaroringizni kutmoqda.{% else %}Navbat bo‘sh.{% endif %}</span></h1>
+  {% if next_open %}<a class="btn btn-primary btn-sm btn-ask" href="{% url 'review' next_open.pk %}"><span class="mz-matrix" data-m></span>Navbatdagini tekshirish</a>{% endif %}
+</div>
+
+<div class="kpi-row">
+  {% for k in kpis %}
+  <article class="kpi">
+    <div class="kpi-main">
+      <span class="label kpi-label">{{ k.label }} · {% if k.backlog %}hozir{% else %}bu hafta{% endif %}</span>
+      <div class="kpi-value num">{{ k.value|uznum }}</div>
+      <div class="tick-spark" data-values="{{ k.spark|spark }}" aria-hidden="true"></div>
+    </div>
+    <div class="kpi-foot">
+      <span class="delta" {% if k.backlog and k.diff > 0 %}data-trend="bad"{% elif k.backlog and k.diff < 0 %}data-trend="good"{% endif %}>
+        {% if k.diff > 0 %}{% icon "arrow-up-right" %}{% elif k.diff < 0 %}{% icon "arrow-down-right" %}{% endif %}{{ k.diff|signed }} ta<span class="delta-ctx">o‘tgan haftaga nisbatan</span>
+      </span>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+
+<div class="app-row">
+  <section class="panel" aria-labelledby="dailyTitle">
+    <div class="panel-head">
+      <h2 class="panel-title" id="dailyTitle">{% icon "chart-column" %}Kunlik so‘rovlar · 30 kun</h2>
+      <div class="panel-actions legend">
+        <span class="legend-item"><span class="legend-sw"></span>Qabul</span>
+        <span class="legend-item"><span class="legend-sw" data-k="2"></span>Jarayonda</span>
+        <span class="legend-item"><span class="legend-sw" data-k="critical"></span>Rad</span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="pixel-chart" id="dailyChart" role="img" aria-label="So‘nggi 30 kunda kelgan so‘rovlar, holati bo‘yicha"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="aiTitle">
+    <div class="panel-head">
+      <h2 class="panel-title" id="aiTitle"><span class="mz-matrix" data-m style="--s:16px"></span>AI xulosalari · bu hafta</h2>
+    </div>
+    <div class="panel-body ai-summary">
+      <div class="fig-row"><span class="fig num">{{ analysed }}</span><span class="muted">ta loyiha tahlil qilindi</span></div>
+      {% if analysed %}
+      <div class="share-bar" role="img" aria-label="{% for v in verdicts %}{{ v.label }}: {{ v.n }}. {% endfor %}">
+        {% for v in verdicts %}{% if v.n %}<span {% if v.key == "conflict" %}data-tone="critical"{% elif v.key == "minor" %}data-s="3"{% else %}data-s="5"{% endif %} style="flex:{{ v.n }}">{{ v.pct }}%</span>{% endif %}{% endfor %}
+      </div>
+      <ul class="verdict-legend">
+        {% for v in verdicts %}
+        <li><span class="legend-sw" {% if v.key == "conflict" %}data-k="critical"{% elif v.key == "minor" %}style="background:var(--seq-3)"{% endif %}></span>{{ v.label }}<span class="mono">{{ v.n }}</span></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+<section class="panel" aria-labelledby="tableTitle">
+  <div class="panel-head">
+    <h2 class="panel-title" id="tableTitle">{% icon "inbox" %}So‘nggi so‘rovlar</h2>
+    <div class="panel-actions"><a class="btn btn-secondary btn-sm" href="{% url 'requests' %}">Barchasi</a></div>
+  </div>
+  <div class="panel-body flush">
+    {% include "regulations/partials/_requests_table.html" with rows=recent %}
+  </div>
+</section>
+{{ chart|json_script:"chart-data" }}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layouts/app.html" %}
+{% load mezon %}
+{% block title %}So‘rovlar{% endblock %}
+{% block crumbs %}<span aria-current="page">So‘rovlar</span>{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1 class="page-title">So‘rovlar <span class="page-count mono">{{ page.paginator.count }}</span></h1>
+</div>
+
+<form class="filter-bar" method="get">
+  <nav class="pills" aria-label="Holat">
+    {% for key, label in tabs %}<a href="{% query holat=key page=None %}" {% if status == key %}aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}
+  </nav>
+  <input type="hidden" name="holat" value="{{ status }}">
+  <div class="filter-controls">
+    <div class="input-wrap filter-search">
+      {% icon "search" "icon icon-sm" %}
+      <input class="input input-sm" type="search" name="q" value="{{ q }}" placeholder="Qidirish" aria-label="Qidirish">
+    </div>
+    <div class="select-wrap">
+      <select class="select input-sm" name="hudud" aria-label="Hudud" data-autosubmit>
+        <option value="">Barcha hududlar</option>
+        {% for r in regions %}<option value="{{ r.code }}" {% if region == r.code %}selected{% endif %}>{{ r.name }}</option>{% endfor %}
+      </select>{% icon "chevron-down" "icon icon-sm" %}
+    </div>
+  </div>
+</form>
+
+<section class="panel" aria-label="So‘rovlar ro‘yxati">
+  <div class="panel-body flush">
+    {% include "regulations/partials/_requests_table.html" with rows=page.object_list %}
+  </div>
+  {% if page.paginator.num_pages > 1 %}
+  <div class="panel-foot list-foot">
+    <span>{{ page.start_index }}–{{ page.end_index }} / {{ page.paginator.count }}</span>
+    <nav class="pager" aria-label="Sahifalar">
+      {% if page.has_previous %}<a href="{% query page=page.previous_page_number %}" aria-label="Oldingi">{% icon "chevron-left" "icon icon-sm" %}</a>{% endif %}
+      <span class="pager-pos mono">{{ page.number }} / {{ page.paginator.num_pages }}</span>
+      {% if page.has_next %}<a href="{% query page=page.next_page_number %}" aria-label="Keyingi">{% icon "chevron-right" "icon icon-sm" %}</a>{% endif %}
+    </nav>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

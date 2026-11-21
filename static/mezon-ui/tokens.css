@@ -1,0 +1,289 @@
+/* ==========================================================================
+   Mezon UI — Design tokens  v1.0
+   Light is the default (office daylight, large monitors). Dark is a selected
+   theme, not an inversion: every step is re-picked for the dark surface.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Type ---------------------------------------------------------- */
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-display: 2.75rem;   /* 44 — AI greeting, kit hero          */
+  --text-h1: 2rem;           /* 32 — page title                     */
+  --text-h2: 1.5rem;         /* 24 — section title                  */
+  --text-h3: 1.125rem;       /* 18 — panel / dialog title           */
+  --text-lg: 0.9375rem;      /* 15 — chat body, lead text           */
+  --text-md: 0.875rem;       /* 14 — default UI text                */
+  --text-sm: 0.8125rem;      /* 13 — secondary, table cells         */
+  --text-xs: 0.75rem;        /* 12 — captions, meta                 */
+  --text-label: 0.6875rem;   /* 11 — mono uppercase labels          */
+
+  --figure-xl: 3rem;         /* 48 — the one hero figure per view   */
+  --figure-lg: 1.75rem;      /* 28 — KPI tile value                 */
+  --figure-md: 1.25rem;      /* 20 — widget figure                  */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.02em;
+  --tracking-label: 0.06em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ---- Space (4-pt) --------------------------------------------------- */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* ---- Radius --------------------------------------------------------- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  /* ---- Control sizes --------------------------------------------------- */
+  --control-sm: 30px;
+  --control-md: 36px;
+  --control-lg: 44px;
+
+  /* ---- Motion --------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);      /* exponential ease-out */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 320ms;
+
+  /* ---- Color: neutrals (warm, slightly stony) -------------------------- */
+  --ground: #ecece8;          /* outside the app frame                  */
+  --canvas: #fbfbfa;          /* app canvas                             */
+  --surface: #ffffff;         /* cards, sheets, inputs                  */
+  --surface-sunken: #f4f4f1;  /* sidebar, panel trays, user bubble      */
+  --surface-hover: #efefeb;   /* ghost hover wash                       */
+  --surface-active: #e7e7e2;  /* pressed / selected wash                */
+  --surface-inverse: #0b0b0b; /* black controls, bulk bar, tooltips     */
+
+  --line: #e6e5e0;            /* hairline                               */
+  --line-strong: #d4d3cc;     /* input borders, dividers that matter    */
+  --line-inverse: #2a2a28;
+
+  --ink: #0b0b0b;             /* primary text — 19.8:1 on white         */
+  --ink-2: #4c4b47;           /* secondary — 8.7:1                      */
+  --ink-3: #6b6a65;           /* muted, placeholders — 5.4:1            */
+  --ink-4: #a3a29b;           /* disabled, decorative only              */
+  --ink-inverse: #fafaf8;
+  --ink-inverse-2: #b9b8b1;
+
+  /* ---- Color: actions ------------------------------------------------- */
+  --action: #0b0b0b;
+  --action-hover: #2b2b29;
+  --action-active: #000000;
+  --action-ink: #ffffff;
+
+  --focus: #0b0b0b;
+  --selection: rgba(11, 11, 11, 0.12);
+
+  /* ---- Color: status (reserved — never used for series identity) ------- */
+  --good: #0c8a0c;
+  --good-soft: #e8f3e5;
+  --good-ink: #17621a;
+  --warning: #e0a000;
+  --warning-soft: #fbf1d6;
+  --warning-ink: #6f4d00;
+  --serious: #e5763f;
+  --serious-soft: #fcebe1;
+  --serious-ink: #8d3a12;
+  --critical: #d03b3b;
+  --critical-soft: #fbe8e6;
+  --critical-ink: #a12424;
+  --neutral-soft: #efefeb;
+  --neutral-ink: #4c4b47;
+
+  /* ---- Color: data (monochrome world) ---------------------------------- */
+  --data-1: #0b0b0b;          /* primary series                         */
+  --data-2: #8e8d87;          /* secondary series — 3.4:1 on white      */
+  --data-empty: #efeee9;      /* unfilled pixel / track                 */
+  --data-grid: #ecebe6;       /* gridline hairline                      */
+  --data-axis: #c9c8c1;
+  /* sequential ink ramp (magnitude) */
+  --seq-0: #f1f0eb;
+  --seq-1: #dcdbd4;
+  --seq-2: #b8b7af;
+  --seq-3: #8a8982;
+  --seq-4: #55544f;
+  --seq-5: #0b0b0b;
+
+  /* ---- Elevation ------------------------------------------------------ */
+  --shadow-xs: 0 1px 2px rgba(17, 17, 15, 0.05);
+  --shadow-sm: 0 1px 2px rgba(17, 17, 15, 0.04), 0 2px 6px -2px rgba(17, 17, 15, 0.06);
+  --shadow-md: 0 2px 4px -1px rgba(17, 17, 15, 0.05), 0 10px 24px -8px rgba(17, 17, 15, 0.14);
+  --shadow-lg: 0 4px 8px -2px rgba(17, 17, 15, 0.05), 0 24px 48px -16px rgba(17, 17, 15, 0.22);
+  --shadow-control: 0 1px 1px rgba(17, 17, 15, 0.04), 0 1px 3px rgba(17, 17, 15, 0.05);
+
+  /* ---- On-color & tint tokens (text on fills) ------------------------- */
+  --on-critical: #ffffff;
+  --on-good: #ffffff;
+  --on-seq-3: #0b0b0b;
+  --on-seq-4: #ffffff;
+  --kbd-on-action-bg: rgba(255, 255, 255, 0.12);
+  --kbd-on-action-line: rgba(255, 255, 255, 0.18);
+  --tint-0-bg: #e4e2db; --tint-0-fg: #3f3e3a;
+  --tint-1-bg: #e3e6e1; --tint-1-fg: #34413a;
+  --tint-2-bg: #e6e2ea; --tint-2-fg: #403850;
+  --tint-3-bg: #ebe4da; --tint-3-fg: #4d3d28;
+  --tint-4-bg: #dfe4ea; --tint-4-fg: #2f3d4d;
+}
+
+/* ---- Dark: selected, not flipped ------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --ground: #070707;
+    --canvas: #0f0f0e;
+    --surface: #171716;
+    --surface-sunken: #121211;
+    --surface-hover: #1f1f1d;
+    --surface-active: #272725;
+    --surface-inverse: #f2f1ed;
+    --line: #262624;
+    --line-strong: #353532;
+    --line-inverse: #d8d7d0;
+    --ink: #f2f1ed;
+    --ink-2: #c4c3bb;
+    --ink-3: #9a9991;
+    --ink-4: #6f6e68;
+    --ink-inverse: #0b0b0b;
+    --ink-inverse-2: #4c4b47;
+    --action: #f2f1ed;
+    --action-hover: #dcdbd4;
+    --action-active: #ffffff;
+    --action-ink: #0b0b0b;
+    --focus: #f2f1ed;
+    --selection: rgba(242, 241, 237, 0.16);
+    --good: #2fb52f;
+    --good-soft: #142616;
+    --good-ink: #8fd88a;
+    --warning: #f0b429;
+    --warning-soft: #2a2212;
+    --warning-ink: #f1cd74;
+    --serious: #ef8a58;
+    --serious-soft: #2d1b12;
+    --serious-ink: #f4ad88;
+    --critical: #e66767;
+    --critical-soft: #2e1616;
+    --critical-ink: #f29a98;
+    --neutral-soft: #222220;
+    --neutral-ink: #c4c3bb;
+    --data-1: #f2f1ed;
+    --data-2: #77766f;
+    --data-empty: #1f1f1d;
+    --data-grid: #232321;
+    --data-axis: #3a3a37;
+    --seq-0: #1d1d1b;
+    --seq-1: #303030;
+    --seq-2: #4f4f4b;
+    --seq-3: #7f7e77;
+    --seq-4: #b5b4ac;
+    --seq-5: #f2f1ed;
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.4), 0 12px 28px -8px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 4px 8px -2px rgba(0, 0, 0, 0.4), 0 28px 56px -16px rgba(0, 0, 0, 0.8);
+    --shadow-control: 0 1px 1px rgba(0, 0, 0, 0.3);
+    --on-critical: #1b0909;
+    --on-good: #071a07;
+    --on-seq-3: #0b0b0b;
+    --on-seq-4: #0b0b0b;
+    --kbd-on-action-bg: rgba(0, 0, 0, 0.07);
+    --kbd-on-action-line: rgba(0, 0, 0, 0.14);
+    --tint-0-bg: #2a2a27; --tint-0-fg: #d6d5ce;
+    --tint-1-bg: #232a25; --tint-1-fg: #bcd0c2;
+    --tint-2-bg: #29252e; --tint-2-fg: #cdc3da;
+    --tint-3-bg: #2d2720; --tint-3-fg: #dccbb2;
+    --tint-4-bg: #222830; --tint-4-fg: #bccad8;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #070707;
+  --canvas: #0f0f0e;
+  --surface: #171716;
+  --surface-sunken: #121211;
+  --surface-hover: #1f1f1d;
+  --surface-active: #272725;
+  --surface-inverse: #f2f1ed;
+  --line: #262624;
+  --line-strong: #353532;
+  --line-inverse: #d8d7d0;
+  --ink: #f2f1ed;
+  --ink-2: #c4c3bb;
+  --ink-3: #9a9991;
+  --ink-4: #6f6e68;
+  --ink-inverse: #0b0b0b;
+  --ink-inverse-2: #4c4b47;
+  --action: #f2f1ed;
+  --action-hover: #dcdbd4;
+  --action-active: #ffffff;
+  --action-ink: #0b0b0b;
+  --focus: #f2f1ed;
+  --selection: rgba(242, 241, 237, 0.16);
+  --good: #2fb52f;
+  --good-soft: #142616;
+  --good-ink: #8fd88a;
+  --warning: #f0b429;
+  --warning-soft: #2a2212;
+  --warning-ink: #f1cd74;
+  --serious: #ef8a58;
+  --serious-soft: #2d1b12;
+  --serious-ink: #f4ad88;
+  --critical: #e66767;
+  --critical-soft: #2e1616;
+  --critical-ink: #f29a98;
+  --neutral-soft: #222220;
+  --neutral-ink: #c4c3bb;
+  --data-1: #f2f1ed;
+  --data-2: #77766f;
+  --data-empty: #1f1f1d;
+  --data-grid: #232321;
+  --data-axis: #3a3a37;
+  --seq-0: #1d1d1b;
+  --seq-1: #303030;
+  --seq-2: #4f4f4b;
+  --seq-3: #7f7e77;
+  --seq-4: #b5b4ac;
+  --seq-5: #f2f1ed;
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.4), 0 12px 28px -8px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 4px 8px -2px rgba(0, 0, 0, 0.4), 0 28px 56px -16px rgba(0, 0, 0, 0.8);
+  --shadow-control: 0 1px 1px rgba(0, 0, 0, 0.3);
+  --on-critical: #1b0909;
+  --on-good: #071a07;
+  --on-seq-3: #0b0b0b;
+  --on-seq-4: #0b0b0b;
+  --kbd-on-action-bg: rgba(0, 0, 0, 0.07);
+  --kbd-on-action-line: rgba(0, 0, 0, 0.14);
+  --tint-0-bg: #2a2a27; --tint-0-fg: #d6d5ce;
+  --tint-1-bg: #232a25; --tint-1-fg: #bcd0c2;
+  --tint-2-bg: #29252e; --tint-2-fg: #cdc3da;
+  --tint-3-bg: #2d2720; --tint-3-fg: #dccbb2;
+  --tint-4-bg: #222830; --tint-4-fg: #bccad8;
+}
